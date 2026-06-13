@@ -1905,7 +1905,7 @@
     const room = document.getElementById('room-select').value;
     const guests = document.getElementById('guests-select').value;
     const msg = encodeURIComponent(
-      `Hello! I'd like to check availability at Kamaxi Beach Resort & Yoga Retreat.\n\n` +
+      `Hello! I'd like to check availability at Kamaxi Beach Resort.\n\n` +
       `Room Type: ${room}\nGuests: ${guests}\nCheck-in: ${cin}\nCheck-out: ${cout}\n\n` +
       `Please let me know availability and rates. Thank you!`
     );
@@ -1914,7 +1914,7 @@
 
   function bookRoom(name, price) {
     const msg = encodeURIComponent(
-      `Hello! I'm interested in booking the ${name} (${price}/night) at Kamaxi Beach Resort & Yoga Retreat, Polem Beach, Goa.\n\nCould you please share availability and confirm the booking? Thank you!`
+      `Hello! I'm interested in booking the ${name} (${price}/night) at Kamaxi Beach Resort, Polem Beach, Goa.\n\nCould you please share availability and confirm the booking? Thank you!`
     );
     window.open(`https://wa.me/919270318818?text=${msg}`, '_blank');
   }
