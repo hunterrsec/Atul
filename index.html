@@ -82,6 +82,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Jost:wght@200;300;400;500;600&family=Sacramento&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
   <!-- Sitemap Link -->
   <link rel="sitemap" type="application/xml" href="/sitemap.xml">
  </head>
@@ -298,6 +299,83 @@
     .room-price .night { font-size: 0.72rem; color: rgba(255,255,255,0.4); }
     .room-book-btn { padding: 10px 22px; background: transparent; border: 1px solid rgba(201,169,110,0.4); color: var(--gold-light); border-radius: var(--radius-sm); font-family: var(--font-sans); font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase; cursor: pointer; transition: var(--transition-fast); }
     .room-book-btn:hover { background: var(--gold); border-color: var(--gold); color: var(--white); }
+
+    /* ===== ROOM QR PAYMENT ===== */
+    .room-pay-btn { display: flex; align-items: center; justify-content: center; gap: 10px; width: 100%; margin-top: 14px; padding: 13px 16px; background: linear-gradient(135deg, rgba(201,169,110,0.16), rgba(201,169,110,0.05)); border: 1px solid rgba(201,169,110,0.35); border-radius: var(--radius-sm); color: var(--gold-light); font-family: var(--font-sans); font-size: 0.7rem; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; cursor: pointer; transition: var(--transition-fast); position: relative; overflow: hidden; }
+    .room-pay-btn::before { content: ''; position: absolute; inset: 0; background: linear-gradient(135deg, var(--gold), var(--gold-dark)); opacity: 0; transition: opacity 0.3s ease; }
+    .room-pay-btn:hover::before { opacity: 1; }
+    .room-pay-btn > * { position: relative; z-index: 1; }
+    .room-pay-btn i { font-size: 0.95rem; color: var(--gold); transition: color 0.3s ease; }
+    .room-pay-btn:hover { color: var(--white); border-color: transparent; box-shadow: var(--shadow-gold); }
+    .room-pay-btn:hover i { color: var(--white); }
+    .room-pay-amount { font-family: var(--font-serif); font-size: 0.95rem; letter-spacing: 0.02em; text-transform: none; color: var(--gold); transition: color 0.3s ease; }
+    .room-pay-btn:hover .room-pay-amount { color: var(--white); }
+
+    /* ===== PAYMENT MODAL ===== */
+    .payment-modal { position: fixed; inset: 0; z-index: 3000; display: flex; align-items: center; justify-content: center; padding: 24px; opacity: 0; visibility: hidden; transition: opacity 0.35s ease, visibility 0.35s ease; }
+    .payment-modal.open { opacity: 1; visibility: visible; }
+    .payment-overlay { position: absolute; inset: 0; background: rgba(8,28,27,0.78); backdrop-filter: blur(10px); }
+    .payment-card { position: relative; width: 100%; max-width: 470px; max-height: 92vh; overflow-y: auto; background: var(--off-white); border-radius: var(--radius-lg); padding: 40px; box-shadow: 0 48px 120px rgba(0,0,0,0.5); border: 1px solid rgba(201,169,110,0.25); transform: translateY(24px) scale(0.97); transition: transform 0.4s cubic-bezier(0.25,0.46,0.45,0.94); }
+    .payment-modal.open .payment-card { transform: translateY(0) scale(1); }
+    .payment-close { position: absolute; top: 18px; right: 18px; width: 38px; height: 38px; border-radius: 50%; background: var(--sand); color: var(--deep-teal); display: flex; align-items: center; justify-content: center; font-size: 0.9rem; transition: var(--transition-fast); z-index: 2; }
+    .payment-close:hover { background: var(--deep-teal); color: var(--gold); transform: rotate(90deg); }
+    .payment-kicker { font-size: 0.66rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--gold-dark); display: flex; align-items: center; gap: 8px; margin-bottom: 10px; }
+    .payment-kicker i { font-size: 0.8rem; }
+    .payment-title { font-family: var(--font-serif); font-size: 1.7rem; font-weight: 400; color: var(--deep-teal); line-height: 1.2; margin-bottom: 6px; letter-spacing: -0.01em; }
+    .payment-title em { font-style: italic; color: var(--teal-light); }
+    .payment-sub { font-size: 0.86rem; font-weight: 300; color: var(--gray-400); line-height: 1.7; margin-bottom: 22px; }
+    .payment-summary { display: flex; align-items: center; justify-content: space-between; padding: 16px 20px; background: var(--white); border: 1px solid var(--gray-200); border-radius: var(--radius-md); margin-bottom: 8px; }
+    .payment-summary-label { font-size: 0.62rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--gray-400); display: block; margin-bottom: 3px; }
+    .payment-summary-value { font-family: var(--font-serif); font-size: 1.05rem; color: var(--deep-teal); }
+    .payment-dates { display: grid; grid-template-columns: 1fr auto 1fr; gap: 10px; align-items: stretch; margin-bottom: 10px; }
+    .pay-date-field { background: var(--white); border: 1px solid var(--gray-200); border-radius: var(--radius-md); padding: 12px 16px; display: flex; flex-direction: column; gap: 4px; transition: border-color 0.2s ease, box-shadow 0.2s ease; }
+    .pay-date-field:focus-within { border-color: var(--gold); box-shadow: 0 0 0 3px rgba(201,169,110,0.15); }
+    .pay-date-label { font-size: 0.6rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--gray-400); display: flex; align-items: center; gap: 6px; }
+    .pay-date-label i { color: var(--gold); font-size: 0.7rem; }
+    .pay-date-field input[type="date"] { border: none; outline: none; background: transparent; font-family: var(--font-serif); font-size: 0.98rem; color: var(--deep-teal); cursor: pointer; width: 100%; padding: 0; }
+    .pay-date-field input[type="date"]::-webkit-calendar-picker-indicator { cursor: pointer; opacity: 0.55; }
+    .pay-date-arrow { display: flex; align-items: center; color: var(--gold-dark); font-size: 0.8rem; }
+    .payment-nights-summary { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 12px 18px; background: var(--sand); border: 1px dashed var(--sand-dark); border-radius: var(--radius-sm); margin-bottom: 20px; font-size: 0.78rem; color: var(--gray-700); flex-wrap: wrap; }
+    .payment-nights-summary i { color: var(--gold-dark); margin-right: 6px; }
+    .payment-nights-summary strong { font-family: var(--font-serif); font-size: 0.98rem; color: var(--deep-teal); font-weight: 600; }
+    .payment-nights-summary .pay-range { font-family: var(--font-serif); color: var(--gray-700); }
+
+    /* ===== BANK TRANSFER + NOTES ===== */
+    .rate-note { display: flex; align-items: flex-start; gap: 10px; padding: 12px 16px; background: rgba(201,169,110,0.1); border: 1px solid rgba(201,169,110,0.35); border-radius: var(--radius-sm); font-size: 0.78rem; font-weight: 300; color: var(--gray-700); line-height: 1.6; margin-bottom: 16px; }
+    .rate-note i { color: var(--gold-dark); margin-top: 2px; }
+    .rate-note strong { color: var(--deep-teal); font-weight: 500; }
+    .pay-divider { display: flex; align-items: center; gap: 12px; color: var(--gray-400); font-size: 0.66rem; letter-spacing: 0.2em; text-transform: uppercase; margin: 18px 0 14px; }
+    .pay-divider::before, .pay-divider::after { content: ''; flex: 1; height: 1px; background: var(--gray-200); }
+    .bank-panel { background: var(--white); border: 1px solid var(--gray-200); border-radius: var(--radius-md); padding: 18px 20px; margin-bottom: 16px; }
+    .bank-head { display: flex; align-items: center; gap: 12px; margin-bottom: 14px; padding-bottom: 14px; border-bottom: 1px dashed var(--gray-200); }
+    .bank-head i { width: 38px; height: 38px; border-radius: 50%; background: linear-gradient(135deg, var(--teal), var(--deep-teal)); color: var(--gold-light); display: flex; align-items: center; justify-content: center; font-size: 0.95rem; flex-shrink: 0; }
+    .bank-title { font-family: var(--font-serif); font-size: 1.05rem; color: var(--deep-teal); display: block; line-height: 1.2; }
+    .bank-sub { font-size: 0.68rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gray-400); }
+    .bank-row { display: flex; align-items: center; gap: 10px; padding: 7px 0; font-size: 0.82rem; }
+    .bank-k { min-width: 88px; font-size: 0.62rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--gray-400); flex-shrink: 0; }
+    .bank-v { font-family: var(--font-serif); font-size: 0.95rem; color: var(--charcoal); word-break: break-word; flex: 1; }
+    .copy-btn { width: 28px; height: 28px; border-radius: 8px; border: 1px solid var(--gray-200); background: var(--off-white); color: var(--teal-light); font-size: 0.75rem; display: flex; align-items: center; justify-content: center; transition: var(--transition-fast); flex-shrink: 0; }
+    .copy-btn:hover { background: var(--deep-teal); color: var(--gold); border-color: var(--deep-teal); }
+    .copy-btn.copied { background: var(--teal-light); color: #fff; border-color: var(--teal-light); }
+    .bank-note { display: flex; align-items: flex-start; gap: 8px; font-size: 0.75rem; font-weight: 300; color: var(--gray-400); line-height: 1.55; margin-top: 10px; padding-top: 12px; border-top: 1px dashed var(--gray-200); }
+    .bank-note i { color: var(--gold); margin-top: 2px; }
+    .payment-total { display: flex; align-items: center; justify-content: space-between; padding: 16px 20px; background: linear-gradient(135deg, var(--deep-teal), #123B38); border-radius: var(--radius-md); margin-bottom: 22px; }
+    .payment-total .label { font-size: 0.66rem; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(255,255,255,0.6); }
+    .payment-total .value { font-family: var(--font-serif); font-size: 1.7rem; color: var(--gold); line-height: 1; }
+    .payment-total .per { font-size: 0.7rem; color: rgba(255,255,255,0.5); display: block; margin-top: 4px; }
+    .qr-wrap { display: flex; flex-direction: column; align-items: center; padding: 24px; background: var(--white); border: 1px solid var(--gray-200); border-radius: var(--radius-md); margin-bottom: 18px; }
+    .qr-frame { padding: 14px; background: #fff; border: 1px solid var(--gray-200); border-radius: 12px; box-shadow: 0 8px 24px rgba(0,0,0,0.08); line-height: 0; }
+    .qr-frame canvas, .qr-frame img { display: block; }
+    .qr-hint { margin-top: 14px; font-size: 0.72rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--gray-400); display: flex; align-items: center; gap: 7px; }
+    .qr-hint i { color: var(--teal-light); }
+    .payment-actions { display: flex; flex-direction: column; gap: 10px; }
+    .btn-ghost { background: transparent; color: var(--deep-teal); border: 1px solid var(--gray-200); }
+    .btn-ghost:hover { background: var(--sand); border-color: var(--deep-teal); transform: translateY(-2px); }
+    .payment-note { display: flex; align-items: flex-start; gap: 10px; font-size: 0.78rem; font-weight: 300; color: var(--gray-400); line-height: 1.6; margin-top: 16px; padding-top: 16px; border-top: 1px dashed var(--gray-200); }
+    .payment-note i { color: var(--gold); margin-top: 2px; }
+    .payment-lock { display: flex; align-items: center; justify-content: center; gap: 7px; font-size: 0.66rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--gray-400); margin-top: 16px; }
+    .payment-lock i { color: var(--teal-light); }
+    @media (max-width: 520px) { .payment-card { padding: 28px 22px; } }
 
     /* ===== EXPERIENCE ===== */
     #experience { padding: 120px 0; background: var(--sand); }
@@ -870,6 +948,7 @@
               </div>
               <button class="room-book-btn" onclick="bookRoom('Standard Room','₹3,500')">Book Now</button>
             </div>
+            <button class="room-pay-btn" onclick="openPayment('Standard Room', 3500)"><i class="fas fa-qrcode" aria-hidden="true"></i><span>Make payment for Booking Room</span><span class="room-pay-amount">₹3,500</span></button>
           </div>
         </div>
 
@@ -898,6 +977,7 @@
               </div>
               <button class="room-book-btn" onclick="bookRoom('Deluxe Sea Facing Hut','₹4,000')">Book Now</button>
             </div>
+            <button class="room-pay-btn" onclick="openPayment('Deluxe Sea Facing Hut', 4000)"><i class="fas fa-qrcode" aria-hidden="true"></i><span>Make payment for Booking Room</span><span class="room-pay-amount">₹4,000</span></button>
           </div>
         </div>
 
@@ -925,6 +1005,7 @@
               </div>
               <button class="room-book-btn" onclick="bookRoom('Super Deluxe Sea Facing','₹4,500')">Book Now</button>
             </div>
+            <button class="room-pay-btn" onclick="openPayment('Super Deluxe Sea Facing', 4500)"><i class="fas fa-qrcode" aria-hidden="true"></i><span>Make payment for Booking Room</span><span class="room-pay-amount">₹4,500</span></button>
           </div>
         </div>
 
@@ -953,6 +1034,7 @@
               </div>
               <button class="room-book-btn" onclick="bookRoom('Sea Facing Bungalow','₹6,000')">Book Now</button>
             </div>
+            <button class="room-pay-btn" onclick="openPayment('Sea Facing Bungalow', 6000)"><i class="fas fa-qrcode" aria-hidden="true"></i><span>Make payment for Booking Room</span><span class="room-pay-amount">₹6,000</span></button>
           </div>
         </div>
       </div>
@@ -1101,6 +1183,94 @@
       </div>
     </div>
   </section>
+
+  <!-- PAYMENT MODAL -->
+  <div class="payment-modal" id="paymentModal" role="dialog" aria-modal="true" aria-label="Make payment for booking room">
+    <div class="payment-overlay" onclick="closePayment()"></div>
+    <div class="payment-card">
+      <button class="payment-close" onclick="closePayment()" aria-label="Close payment dialog"><i class="fas fa-times" aria-hidden="true"></i></button>
+      <span class="payment-kicker"><i class="fas fa-shield-alt" aria-hidden="true"></i>Secure UPI Payment</span>
+      <h3 class="payment-title">Make payment for <em>Booking Room</em></h3>
+      <p class="payment-sub">Complete your reservation by scanning the QR code with any UPI app. The amount is calculated from the room rate.</p>
+
+      <div class="payment-summary">
+        <div><span class="payment-summary-label">Room</span><div class="payment-summary-value" id="payRoomName">—</div></div>
+        <div style="text-align:right;"><span class="payment-summary-label">Rate / Night</span><div class="payment-summary-value" id="payRoomRate">—</div></div>
+      </div>
+
+      <div class="payment-dates">
+        <div class="pay-date-field">
+          <span class="pay-date-label"><i class="fas fa-calendar-alt" aria-hidden="true"></i>Check-in</span>
+          <input type="date" id="payCheckin" onchange="syncPaymentDates()" />
+        </div>
+        <div class="pay-date-arrow"><i class="fas fa-arrow-right" aria-hidden="true"></i></div>
+        <div class="pay-date-field">
+          <span class="pay-date-label"><i class="fas fa-calendar-check" aria-hidden="true"></i>Check-out</span>
+          <input type="date" id="payCheckout" onchange="syncPaymentDates()" />
+        </div>
+      </div>
+      <div class="payment-nights-summary">
+        <span><i class="fas fa-moon" aria-hidden="true"></i><strong id="payNightsLabel">1 Night</strong>&nbsp;stay</span>
+        <span class="pay-range" id="payDateRange">—</span>
+      </div>
+
+      <div class="payment-total">
+        <span class="label">Total Payable</span>
+        <div><div class="value" id="payTotal">₹3,500</div><div class="per" id="payTotalPer">1 night × ₹3,500</div></div>
+      </div>
+
+      <div class="rate-note"><i class="fas fa-exclamation-circle" aria-hidden="true"></i><span><strong>Note:</strong> Booking rates may change. The final rate for your stay will be confirmed by our reservations team at the time of booking.</span></div>
+
+      <div class="qr-wrap">
+        <div class="qr-frame"><div id="payQr"></div></div>
+        <span class="qr-hint"><i class="fas fa-camera" aria-hidden="true"></i>Scan to pay via GPay · PhonePe · Paytm</span>
+      </div>
+
+      <div class="pay-divider"><span>Prefer Bank Transfer?</span></div>
+
+      <div class="bank-panel">
+        <div class="bank-head">
+          <i class="fas fa-university" aria-hidden="true"></i>
+          <div>
+            <span class="bank-title">KAMAXI BEACH RESORT</span>
+            <span class="bank-sub">Pay directly to our account</span>
+          </div>
+        </div>
+        <div class="bank-row">
+          <span class="bank-k">Account Name</span>
+          <span class="bank-v">KAMAXI BEACH RESORT</span>
+        </div>
+        <div class="bank-row">
+          <span class="bank-k">Account No.</span>
+          <span class="bank-v">50200096475865</span>
+          <button class="copy-btn" onclick="copyBankField('50200096475865', this)" aria-label="Copy account number"><i class="fas fa-copy" aria-hidden="true"></i></button>
+        </div>
+        <div class="bank-row">
+          <span class="bank-k">Bank Name</span>
+          <span class="bank-v">HDFC BANK LTD, Canacona Branch</span>
+        </div>
+        <div class="bank-row">
+          <span class="bank-k">IFSC Code</span>
+          <span class="bank-v">HDFC0001262</span>
+          <button class="copy-btn" onclick="copyBankField('HDFC0001262', this)" aria-label="Copy IFSC code"><i class="fas fa-copy" aria-hidden="true"></i></button>
+        </div>
+        <div class="bank-row">
+          <span class="bank-k">SWIFT Code</span>
+          <span class="bank-v">HDFCINBB</span>
+          <button class="copy-btn" onclick="copyBankField('HDFCINBB', this)" aria-label="Copy SWIFT code"><i class="fas fa-copy" aria-hidden="true"></i></button>
+        </div>
+        <p class="bank-note"><i class="fas fa-info-circle" aria-hidden="true"></i>Use your booking reference as the payment remark, then share the transfer receipt on WhatsApp to confirm your booking.</p>
+      </div>
+
+      <div class="payment-actions">
+        <a class="btn btn-gold" id="payWaBtn" href="https://wa.me/919270318818" target="_blank" rel="noopener"><i class="fab fa-whatsapp" aria-hidden="true"></i>Confirm Payment on WhatsApp</a>
+        <a class="btn btn-ghost" href="tel:+919270318818"><i class="fas fa-phone" aria-hidden="true"></i>Need Help? Call Reservations</a>
+      </div>
+
+      <p class="payment-note"><i class="fas fa-info-circle" aria-hidden="true"></i>After scanning and paying, share the payment screenshot on WhatsApp to confirm your booking. Your room is reserved once payment is verified.</p>
+      <div class="payment-lock"><i class="fas fa-lock" aria-hidden="true"></i>100% Secure · Powered by UPI</div>
+    </div>
+  </div>
 
   <!-- LIGHTBOX -->
   <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Image viewer" onclick="closeLightbox(event)">
@@ -1956,6 +2126,141 @@
       `Hello! I'm interested in booking the ${name} (${price}/night) at Kamaxi Beach Resort, Polem Beach, Goa.\n\nCould you please share availability and confirm the booking? Thank you!`
     );
     window.open(`https://wa.me/919270318818?text=${msg}`, '_blank');
+  }
+
+  /* =============================================
+     QR PAYMENT MODAL
+  ============================================= */
+  const UPI_ID = '8668856130@ptsbi';
+  const UPI_NAME = 'Kamaxi Beach Resort';
+  const WHATSAPP_NUMBER = '919270318818';
+
+  const payModal = document.getElementById('paymentModal');
+  const payState = { name: '', rate: 0, nights: 1, checkin: '', checkout: '' };
+  const DAY_MS = 86400000;
+
+  function fmtINR(n) {
+    return '₹' + n.toLocaleString('en-IN');
+  }
+
+  function fmtDate(iso) {
+    if (!iso) return '—';
+    const d = new Date(iso + 'T00:00:00');
+    return d.toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' });
+  }
+
+  function isoDate(offsetDays) {
+    const d = new Date();
+    d.setDate(d.getDate() + offsetDays);
+    return d.toISOString().split('T')[0];
+  }
+
+  function syncPaymentDates() {
+    const cin = document.getElementById('payCheckin');
+    const cout = document.getElementById('payCheckout');
+    if (!cin || !cout) return;
+    let ci = cin.value;
+    let co = cout.value;
+    if (!ci && !co) return;
+    if (!ci) ci = co;
+    if (!co || co <= ci) {
+      const nm = new Date(ci + 'T00:00:00');
+      nm.setDate(nm.getDate() + 1);
+      co = nm.toISOString().split('T')[0];
+    }
+    cin.value = ci;
+    cout.value = co;
+    cout.min = ci;
+    payState.checkin = ci;
+    payState.checkout = co;
+    payState.nights = Math.max(1, Math.round((new Date(co + 'T00:00:00') - new Date(ci + 'T00:00:00')) / DAY_MS));
+    refreshPayTotals();
+  }
+
+  function upiLink() {
+    const tn = `Booking: ${payState.name}, ${payState.checkin} to ${payState.checkout} (${payState.nights} night${payState.nights > 1 ? 's' : ''}) at ${UPI_NAME}`;
+    return `upi://pay?pa=${encodeURIComponent(UPI_ID)}&pn=${encodeURIComponent(UPI_NAME)}&am=${payState.rate * payState.nights}&cu=INR&tn=${encodeURIComponent(tn)}`;
+  }
+
+  function renderPayQr() {
+    const el = document.getElementById('payQr');
+    if (!el) return;
+    el.innerHTML = '';
+    if (typeof QRCode === 'undefined') {
+      el.innerHTML = '<p style="font-size:0.8rem;color:#666;padding:12px;line-height:1.6;">QR unavailable. Pay via UPI ID:<br><strong>' + UPI_ID + '</strong></p>';
+      return;
+    }
+    try {
+      new QRCode(el, { text: upiLink(), width: 210, height: 210, colorDark: '#0D3D3A', colorLight: '#FFFFFF', correctLevel: QRCode.CorrectLevel.M });
+    } catch (err) {
+      el.innerHTML = '<p style="font-size:0.8rem;color:#666;padding:12px;line-height:1.6;">Please try again. UPI ID:<br><strong>' + UPI_ID + '</strong></p>';
+    }
+  }
+
+  function refreshPayTotals() {
+    const total = payState.rate * payState.nights;
+    document.getElementById('payTotal').textContent = fmtINR(total);
+    document.getElementById('payTotalPer').textContent = payState.nights + ' night' + (payState.nights > 1 ? 's' : '') + ' × ' + fmtINR(payState.rate);
+    document.getElementById('payNightsLabel').textContent = payState.nights + ' Night' + (payState.nights > 1 ? 's' : '');
+    document.getElementById('payDateRange').textContent = fmtDate(payState.checkin) + ' → ' + fmtDate(payState.checkout);
+    const msg = encodeURIComponent(
+      `Hello! I've made a payment for ${payState.name} at ${UPI_NAME}.\n\nRoom: ${payState.name}\nCheck-in: ${fmtDate(payState.checkin)}\nCheck-out: ${fmtDate(payState.checkout)}\nNights: ${payState.nights}\nAmount Paid: ${fmtINR(total)}\n\nSharing the payment screenshot for confirmation. Thank you!`
+    );
+    document.getElementById('payWaBtn').href = `https://wa.me/${WHATSAPP_NUMBER}?text=${msg}`;
+    renderPayQr();
+  }
+
+  function openPayment(name, rate) {
+    payState.name = name;
+    payState.rate = rate;
+    payState.nights = 1;
+    payState.checkin = isoDate(0);
+    payState.checkout = isoDate(1);
+    document.getElementById('payRoomName').textContent = name;
+    document.getElementById('payRoomRate').textContent = fmtINR(rate);
+    const cin = document.getElementById('payCheckin');
+    const cout = document.getElementById('payCheckout');
+    cin.min = isoDate(0);
+    cin.value = payState.checkin;
+    cout.min = payState.checkin;
+    cout.value = payState.checkout;
+    refreshPayTotals();
+    payModal.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closePayment() {
+    payModal.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  function copyBankField(text, btn) {
+    const done = () => {
+      const orig = btn.innerHTML;
+      btn.innerHTML = '<i class="fas fa-check" aria-hidden="true"></i>';
+      btn.classList.add('copied');
+      setTimeout(() => { btn.innerHTML = orig; btn.classList.remove('copied'); }, 1800);
+    };
+    const fallback = () => {
+      const ta = document.createElement('textarea');
+      ta.value = text;
+      ta.style.position = 'fixed';
+      ta.style.opacity = '0';
+      document.body.appendChild(ta);
+      ta.select();
+      try { document.execCommand('copy'); done(); } catch (e) {}
+      document.body.removeChild(ta);
+    };
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(text).then(done).catch(fallback);
+    } else {
+      fallback();
+    }
+  }
+
+  if (payModal) {
+    payModal.addEventListener('click', e => { if (e.target === payModal) closePayment(); });
+    document.addEventListener('keydown', e => { if (e.key === 'Escape' && payModal.classList.contains('open')) closePayment(); });
   }
 
 
