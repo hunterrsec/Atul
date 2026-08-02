@@ -195,6 +195,8 @@
     .mobile-menu-footer { position: absolute; bottom: 40px; display: flex; gap: 24px; }
     .mobile-menu-footer a { font-size: 1.3rem; color: rgba(255,255,255,0.5); transition: var(--transition-fast); }
     .mobile-menu-footer a:hover { color: var(--gold); }
+    .mobile-menu-book { margin-top: 10px; font-family: var(--font-sans); font-size: 0.8rem; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase; background: linear-gradient(135deg, var(--gold), var(--gold-dark)); color: var(--white); padding: 14px 44px; border-radius: var(--radius-sm); display: inline-flex; align-items: center; gap: 10px; box-shadow: var(--shadow-gold); text-decoration: none; }
+    .mobile-menu-book:hover { background: linear-gradient(135deg, var(--gold-dark), var(--deep-teal)); }
 
     /* ===== HERO ===== */
     #hero { position: relative; height: 100vh; min-height: 680px; overflow: hidden; display: flex; align-items: center; justify-content: center; }
@@ -799,6 +801,88 @@
       .page-hero { height: 50vh; min-height: 380px; }
       .scroll-indicator { bottom: 90px; }
     }
+
+    /* ========================================
+       RESPONSIVE REFINEMENTS — mobile & tablet polish
+    ======================================== */
+
+    /* ---- Tablet: collapse nav at ≤1000px ---- */
+    @media (max-width: 1000px) {
+      .nav-links, .nav-phone { display: none; }
+      .hamburger { display: flex; }
+    }
+
+    /* ---- Tablet: hide tariff TABLE on ≤768px (cards grid replaces it) ---- */
+    @media (max-width: 768px) {
+      .tariff-table-wrap { display: none; }
+      .tariff-section { padding: 80px 0 40px; }
+      .cta-section { background-attachment: scroll !important; }
+      .policy-banner-inner { gap: 14px; }
+    }
+
+    /* ---- Small phone polish ≤480px ---- */
+    @media (max-width: 480px) {
+      /* Hero badge: allow text to wrap */
+      .hero-badge { flex-wrap: wrap; justify-content: center; padding: 10px 16px; gap: 8px; }
+      .hero-badge span { letter-spacing: 0.12em; font-size: 0.6rem; }
+      .hero-content { padding: 0 12px; }
+      .hero-desc { font-size: 0.92rem; max-width: 92%; }
+      .hero-title { font-size: clamp(2.4rem, 9vw, 4rem); }
+
+      /* Mobile menu: scrollable for short phones */
+      .mobile-menu { gap: 12px; overflow-y: auto; justify-content: flex-start; padding: 90px 24px 70px; -webkit-overflow-scrolling: touch; }
+      .mobile-menu a { font-size: 1.55rem; }
+      .mobile-menu-footer { position: static; margin-top: auto; padding-bottom: 20px; }
+
+      /* Tighter section padding */
+      #about, #rooms, #experience, #gallery, #testimonials, #location,
+      .about-story-section, .directions-section, .cta-section,
+      #guest-policy { padding: 60px 0; }
+
+      /* Floating buttons: smaller */
+      #scroll-top { bottom: 14px; right: 14px; width: 40px; height: 40px; font-size: 0.8rem; }
+      .whatsapp-float { bottom: 14px; left: 14px; width: 48px; height: 48px; font-size: 1.2rem; }
+
+      /* Navbar: compact so logo + CTA fit small screens */
+      #navbar { padding: 14px 0; }
+      .nav-logo-main { font-size: 1.1rem; }
+      .nav-inner { gap: 14px; }
+      .nav-cta { gap: 10px; }
+      .nav-cta .btn-gold { display: none; }
+      .hamburger { padding: 6px; }
+
+      /* Room header note */
+      .rooms-tariff-note { font-size: 0.76rem; padding: 0 4px; }
+
+      /* Testimonials */
+      .testimonial-card { padding: 26px 20px; }
+      .testimonial-text { font-size: 0.95rem; }
+
+      /* Directions heading */
+      .directions-heading { font-size: 1.5rem; }
+
+      /* Tariff terms */
+      .tariff-terms-box h3 { font-size: 1.2rem; }
+
+      /* Payment card */
+      .payment-card { padding: 24px 20px; border-radius: var(--radius-md); }
+      .payment-title { font-size: 1.4rem; }
+      .payment-total .value { font-size: 1.4rem; }
+
+      /* Info cards on location */
+      .info-card p { font-size: 0.9rem; }
+
+      /* Footer */
+      .footer-contact-item span { font-size: 0.8rem; }
+    }
+
+    /* ---- Small landscape / tablet ≤900px ---- */
+    @media (max-width: 900px) {
+      .directions-map { aspect-ratio: 4 / 3; }
+      .booking-bar-inner { flex-direction: column; }
+      .booking-field { border-right: none; border-bottom: 1px solid var(--gray-200); }
+      .booking-submit { padding: 18px; justify-content: center; }
+    }
   </style>
 </head>
 <body>
@@ -848,6 +932,7 @@
   <a onclick="showPage('about');closeMobileMenu()">About Us</a>
   <a onclick="showPage('tariff');closeMobileMenu()">Season Tariff Card</a>
   <a onclick="showPage('directions');closeMobileMenu()">Directions</a>
+  <a class="mobile-menu-book" href="https://wa.me/919270318818" target="_blank" rel="noopener" aria-label="Book now via WhatsApp"><i class="fab fa-whatsapp" aria-hidden="true"></i>Book Now</a>
   <div class="mobile-menu-footer">
     <a href="https://wa.me/919270318818" target="_blank" rel="noopener" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
     <a href="https://instagram.com/kamaxi_beach_resort_official" target="_blank" rel="noopener" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
