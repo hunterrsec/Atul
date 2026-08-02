@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -672,7 +673,6 @@
     .tariff-room-name { font-family: var(--font-serif); font-size: 1.15rem; color: var(--white); line-height: 1.2; }
     .tariff-room-tag { font-size: 0.68rem; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.4); margin-top: 2px; display: block; }
     .tariff-cell-num { text-align: right; white-space: nowrap; }
-    .tariff-regular { font-family: var(--font-serif); font-size: 1rem; color: rgba(255,255,255,0.45); text-decoration: line-through; text-decoration-color: rgba(255,255,255,0.3); }
     .tariff-season { font-family: var(--font-serif); font-size: 1.5rem; color: var(--gold); font-weight: 500; line-height: 1; }
     .tariff-season-sub { font-size: 0.66rem; color: rgba(255,255,255,0.4); margin-top: 3px; }
     .tariff-badge-inline { display: inline-block; margin-left: 10px; background: linear-gradient(135deg, var(--gold), var(--gold-dark)); color: var(--white); font-size: 0.6rem; letter-spacing: 0.1em; text-transform: uppercase; padding: 4px 10px; border-radius: 100px; vertical-align: middle; }
@@ -683,16 +683,7 @@
     .tariff-table tbody tr:hover td.tariff-cell-peak { background: rgba(201,169,110,0.10); }
     .tariff-peak { font-family: var(--font-serif); font-size: 1.5rem; color: var(--gold); font-weight: 500; line-height: 1; }
     .tariff-peak-sub { font-size: 0.66rem; color: rgba(255,255,255,0.4); margin-top: 3px; }
-    .tariff-badge-peak { display: inline-block; margin-left: 10px; background: linear-gradient(135deg, #B7791F, #8B5E12); color: #fff; font-size: 0.6rem; letter-spacing: 0.1em; text-transform: uppercase; padding: 4px 10px; border-radius: 100px; vertical-align: middle; }
 
-    /* Jan & Dec Peak block (mobile cards) */
-    .tariff-card-peak { margin-top: 16px; padding: 13px 14px; background: linear-gradient(135deg, rgba(201,169,110,0.16), rgba(201,169,110,0.05)); border: 1px solid rgba(201,169,110,0.45); border-radius: var(--radius-sm); }
-    .tariff-card-peak-label { display: block; font-size: 0.6rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--gold-dark); font-weight: 500; margin-bottom: 5px; }
-    .tariff-card-peak-label i { margin-right: 6px; }
-    .tariff-card-peak-price { font-family: var(--font-serif); font-size: 1.55rem; font-weight: 500; color: var(--gold-dark); line-height: 1; }
-    .tariff-card-peak-price sup { font-size: 0.75rem; font-weight: 400; }
-    .tariff-card-peak-per { font-size: 0.68rem; color: var(--gray-400); margin-top: 4px; }
-    .tariff-card-peak-tag { display: inline-block; margin-left: 8px; background: linear-gradient(135deg, #B7791F, #8B5E12); color: #fff; font-size: 0.55rem; letter-spacing: 0.12em; text-transform: uppercase; padding: 3px 9px; border-radius: 100px; vertical-align: middle; }
     @media (max-width: 768px) {
       .tariff-table thead { display: none; }
       .tariff-table, .tariff-table tbody, .tariff-table tr, .tariff-table td { display: block; width: 100%; }
@@ -709,7 +700,6 @@
     .tariff-card-icon { width: 56px; height: 56px; margin: 8px auto 18px; border-radius: 50%; background: linear-gradient(135deg, var(--teal), var(--deep-teal)); display: flex; align-items: center; justify-content: center; }
     .tariff-card-icon i { color: var(--gold-light); font-size: 1.15rem; }
     .tariff-card-name { font-family: var(--font-serif); font-size: 1.2rem; color: var(--deep-teal); margin-bottom: 4px; }
-    .tariff-card-old { font-size: 0.78rem; color: var(--gray-400); text-decoration: line-through; margin-bottom: 6px; }
     .tariff-card-price { font-family: var(--font-serif); font-size: 2rem; color: var(--gold-dark); font-weight: 500; line-height: 1; }
     .tariff-card-price sup { font-size: 0.85rem; font-weight: 400; }
     .tariff-card-per { font-size: 0.72rem; color: var(--gray-400); margin-top: 4px; margin-bottom: 18px; }
@@ -723,6 +713,19 @@
     .tariff-terms-list li i { color: var(--gold-dark); margin-top: 3px; flex-shrink: 0; font-size: 0.8rem; }
     @media (max-width: 1100px) { .tariff-cards-grid { grid-template-columns: 1fr 1fr; } }
     @media (max-width: 768px) { .tariff-cards-grid { grid-template-columns: 1fr; } .tariff-terms-box { padding: 26px 24px; } }
+
+    /* Three-season tariff (2026) */
+    .tariff-table thead th .th-sub { display: block; font-size: 0.56rem; font-weight: 400; letter-spacing: 0.06em; text-transform: none; color: rgba(255,255,255,0.45); margin-top: 5px; line-height: 1.5; }
+    .tariff-base { font-family: var(--font-serif); font-size: 1.15rem; color: rgba(255,255,255,0.94); line-height: 1; }
+    .tariff-base-sub { font-size: 0.66rem; color: rgba(255,255,255,0.4); margin-top: 3px; }
+    .tariff-card-seasons { margin-top: 14px; padding: 4px 14px; background: rgba(13,61,58,0.05); border: 1px solid rgba(13,61,58,0.12); border-radius: var(--radius-sm); margin-bottom: 18px; }
+    .tariff-card-season-row { display: flex; align-items: baseline; justify-content: space-between; gap: 8px; padding: 10px 0; border-bottom: 1px dashed rgba(13,61,58,0.14); }
+    .tariff-card-season-row:last-child { border-bottom: none; }
+    .tariff-card-season-label { font-size: 0.6rem; letter-spacing: 0.13em; text-transform: uppercase; color: var(--gray-500); }
+    .tariff-card-season-label i { margin-right: 6px; color: var(--gold-dark); }
+    .tariff-card-season-price { font-family: var(--font-serif); font-size: 1.18rem; font-weight: 500; color: var(--deep-teal); line-height: 1; white-space: nowrap; }
+    .tariff-card-season-row.peak .tariff-card-season-price { color: var(--gold-dark); font-size: 1.32rem; }
+    .tariff-card-season-row.peak { background: rgba(201,169,110,0.08); margin: 0 -14px; padding: 10px 14px; border-bottom: none; }
 
     /* ========================================
        RESPONSIVE
@@ -1649,9 +1652,9 @@
     <div class="page-hero-bg" style="background-image:url('https://raw.githubusercontent.com/hunterrsec/Photos_Atul/refs/heads/main/DJI/Kamaxi.png?w=1920&q=80');"></div>
     <div class="page-hero-overlay" style="background:linear-gradient(135deg,rgba(13,61,58,0.9),rgba(13,61,58,0.68))"></div>
     <div class="page-hero-content">
-      <span class="section-label" style="font-size:1.8rem;margin-bottom:10px;">Peak Season Rates</span>
+      <span class="section-label" style="font-size:1.8rem;margin-bottom:10px;">Room Tariff</span>
       <h1>Season <em>Tariff Card</em></h1>
-      <p>Our updated season rates at Kamaxi Beach Resort, Polem Beach — valid for peak season stays.</p>
+      <p>Transparent season-wise room rates at Kamaxi Beach Resort, Polem Beach — across Regular, Season, and Peak periods.</p>
     </div>
   </div>
 
@@ -1660,14 +1663,14 @@
       <div class="tariff-header reveal">
         <span class="section-subtitle">Rates &amp; Availability</span>
         <span class="section-label">Season Tariff Card</span>
-        <h2 class="section-title">Peak Season <em>Room Rates</em></h2>
+        <h2 class="section-title">Room Tariff by <em>Season</em></h2>
         <div class="gold-divider center"></div>
-        <p>During the peak travel season, a seasonal surcharge of <strong>₹900 per night</strong> applies across all room categories, with a higher peak surcharge of <strong>₹1,500 per night</strong> during the months of <strong>January &amp; December</strong>. Please find the updated tariff below for your reference before booking.</p>
+        <p>Our room tariff is divided into three seasons for the year. Please find the rate applicable to your travel dates below. All rates are per room, per night.</p>
       </div>
 
       <div class="tariff-note-bar reveal">
-        <i class="fas fa-info-circle" aria-hidden="true"></i>
-        <span><strong>Season Surcharge:</strong> All rates below reflect the regular tariff <strong>+ ₹900/night</strong>. <strong>Jan &amp; Dec Peak:</strong> a higher surcharge of <strong>+ ₹1,500/night</strong> applies during the months of January and December. Final rates are subject to confirmation by our reservations team at the time of booking.</span>
+        <i class="fas fa-calendar-alt" aria-hidden="true"></i>
+        <span><strong>Season Dates:</strong> Regular Season — <strong>1st June – 30th September</strong> &nbsp;&middot;&nbsp; Season Rate — <strong>1st October – 17th December &amp; 6th January – 31st May</strong> &nbsp;&middot;&nbsp; Peak Season — <strong>18th December – 5th January</strong></span>
       </div>
 
       <!-- TARIFF TABLE (desktop-friendly) -->
@@ -1676,9 +1679,9 @@
           <thead>
             <tr>
               <th>Room Category</th>
-              <th class="tariff-col-num">Regular Rate</th>
-              <th class="tariff-col-num">Season Rate</th>
-              <th class="tariff-col-num tariff-col-peak">Jan &amp; Dec Rate</th>
+              <th class="tariff-col-num">Regular Season<span class="th-sub">1st June – 30th September</span></th>
+              <th class="tariff-col-num">Season Rate<span class="th-sub">1st Oct – 17th Dec &amp; 6th Jan – 31st May</span></th>
+              <th class="tariff-col-num tariff-col-peak">Peak Season<span class="th-sub">18th December – 5th January</span></th>
             </tr>
           </thead>
           <tbody>
@@ -1692,13 +1695,16 @@
                   </div>
                 </div>
               </td>
-              <td class="tariff-cell-num"><span class="tariff-regular">₹3,500</span></td>
+              <td class="tariff-cell-num">
+                <div class="tariff-base">₹3,500</div>
+                <div class="tariff-base-sub">per night</div>
+              </td>
               <td class="tariff-cell-num">
                 <div class="tariff-season">₹4,400</div>
                 <div class="tariff-season-sub">per night</div>
               </td>
               <td class="tariff-cell-num tariff-cell-peak">
-                <div class="tariff-peak">₹5,000</div>
+                <div class="tariff-peak">₹6,599</div>
                 <div class="tariff-peak-sub">per night</div>
               </td>
             </tr>
@@ -1712,13 +1718,16 @@
                   </div>
                 </div>
               </td>
-              <td class="tariff-cell-num"><span class="tariff-regular">₹4,000</span></td>
+              <td class="tariff-cell-num">
+                <div class="tariff-base">₹4,000</div>
+                <div class="tariff-base-sub">per night</div>
+              </td>
               <td class="tariff-cell-num">
                 <div class="tariff-season">₹4,900</div>
                 <div class="tariff-season-sub">per night</div>
               </td>
               <td class="tariff-cell-num tariff-cell-peak">
-                <div class="tariff-peak">₹5,500</div>
+                <div class="tariff-peak">₹7,499</div>
                 <div class="tariff-peak-sub">per night</div>
               </td>
             </tr>
@@ -1732,13 +1741,16 @@
                   </div>
                 </div>
               </td>
-              <td class="tariff-cell-num"><span class="tariff-regular">₹4,500</span></td>
+              <td class="tariff-cell-num">
+                <div class="tariff-base">₹4,500</div>
+                <div class="tariff-base-sub">per night</div>
+              </td>
               <td class="tariff-cell-num">
                 <div class="tariff-season">₹5,400</div>
                 <div class="tariff-season-sub">per night</div>
               </td>
               <td class="tariff-cell-num tariff-cell-peak">
-                <div class="tariff-peak">₹6,000</div>
+                <div class="tariff-peak">₹7,999</div>
                 <div class="tariff-peak-sub">per night</div>
               </td>
             </tr>
@@ -1752,13 +1764,16 @@
                   </div>
                 </div>
               </td>
-              <td class="tariff-cell-num"><span class="tariff-regular">₹6,000</span></td>
               <td class="tariff-cell-num">
-                <div class="tariff-season">₹6,900</div>
+                <div class="tariff-base">₹6,000</div>
+                <div class="tariff-base-sub">per night</div>
+              </td>
+              <td class="tariff-cell-num">
+                <div class="tariff-season">₹7,499</div>
                 <div class="tariff-season-sub">per night</div>
               </td>
               <td class="tariff-cell-num tariff-cell-peak">
-                <div class="tariff-peak">₹7,500</div>
+                <div class="tariff-peak">₹9,999</div>
                 <div class="tariff-peak-sub">per night</div>
               </td>
             </tr>
@@ -1771,13 +1786,20 @@
         <div class="tariff-card reveal delay-1">
           <div class="tariff-card-icon"><i class="fas fa-bed" aria-hidden="true"></i></div>
           <div class="tariff-card-name">Standard Room</div>
-          <div class="tariff-card-old">was ₹3,500</div>
-          <div class="tariff-card-price">₹4,400</div>
-          <div class="tariff-card-per">per night · season rate</div>
-          <div class="tariff-card-peak">
-            <span class="tariff-card-peak-label"><i class="fas fa-calendar-star" aria-hidden="true"></i>Jan &amp; Dec Peak Rate<span class="tariff-card-peak-tag">+₹1,500</span></span>
-            <span class="tariff-card-peak-price">₹5,000<sup>/night</sup></span>
-            <div class="tariff-card-peak-per">+₹1,500 on regular rate</div>
+          <div class="tariff-card-per">per room · per night</div>
+          <div class="tariff-card-seasons">
+            <div class="tariff-card-season-row">
+              <span class="tariff-card-season-label"><i class="fas fa-sun" aria-hidden="true"></i>Regular Season</span>
+              <span class="tariff-card-season-price">₹3,500</span>
+            </div>
+            <div class="tariff-card-season-row">
+              <span class="tariff-card-season-label"><i class="fas fa-calendar-alt" aria-hidden="true"></i>Season Rate</span>
+              <span class="tariff-card-season-price">₹4,400</span>
+            </div>
+            <div class="tariff-card-season-row peak">
+              <span class="tariff-card-season-label"><i class="fas fa-star" aria-hidden="true"></i>Peak Season</span>
+              <span class="tariff-card-season-price">₹6,599</span>
+            </div>
           </div>
           <a href="https://wa.me/919270318818?text=Hi%2C+I%27d+like+to+know+more+about+the+Season+Tariff+for+the+Standard+Room+at+Kamaxi+Beach+Resort." target="_blank" rel="noopener" class="tariff-card-cta">Enquire Now</a>
         </div>
@@ -1785,26 +1807,40 @@
           <div class="tariff-card-badge">Most Popular</div>
           <div class="tariff-card-icon"><i class="fas fa-water" aria-hidden="true"></i></div>
           <div class="tariff-card-name">Deluxe Sea Facing Hut</div>
-          <div class="tariff-card-old">was ₹4,000</div>
-          <div class="tariff-card-price">₹4,900</div>
-          <div class="tariff-card-per">per night · season rate</div>
-          <div class="tariff-card-peak">
-            <span class="tariff-card-peak-label"><i class="fas fa-calendar-star" aria-hidden="true"></i>Jan &amp; Dec Peak Rate<span class="tariff-card-peak-tag">+₹1,500</span></span>
-            <span class="tariff-card-peak-price">₹5,500<sup>/night</sup></span>
-            <div class="tariff-card-peak-per">+₹1,500 on regular rate</div>
+          <div class="tariff-card-per">per room · per night</div>
+          <div class="tariff-card-seasons">
+            <div class="tariff-card-season-row">
+              <span class="tariff-card-season-label"><i class="fas fa-sun" aria-hidden="true"></i>Regular Season</span>
+              <span class="tariff-card-season-price">₹4,000</span>
+            </div>
+            <div class="tariff-card-season-row">
+              <span class="tariff-card-season-label"><i class="fas fa-calendar-alt" aria-hidden="true"></i>Season Rate</span>
+              <span class="tariff-card-season-price">₹4,900</span>
+            </div>
+            <div class="tariff-card-season-row peak">
+              <span class="tariff-card-season-label"><i class="fas fa-star" aria-hidden="true"></i>Peak Season</span>
+              <span class="tariff-card-season-price">₹7,499</span>
+            </div>
           </div>
           <a href="https://wa.me/919270318818?text=Hi%2C+I%27d+like+to+know+more+about+the+Season+Tariff+for+the+Deluxe+Sea+Facing+Hut+at+Kamaxi+Beach+Resort." target="_blank" rel="noopener" class="tariff-card-cta">Enquire Now</a>
         </div>
         <div class="tariff-card reveal delay-3">
           <div class="tariff-card-icon"><i class="fas fa-star" aria-hidden="true"></i></div>
           <div class="tariff-card-name">Super Deluxe Sea Facing</div>
-          <div class="tariff-card-old">was ₹4,500</div>
-          <div class="tariff-card-price">₹5,400</div>
-          <div class="tariff-card-per">per night · season rate</div>
-          <div class="tariff-card-peak">
-            <span class="tariff-card-peak-label"><i class="fas fa-calendar-star" aria-hidden="true"></i>Jan &amp; Dec Peak Rate<span class="tariff-card-peak-tag">+₹1,500</span></span>
-            <span class="tariff-card-peak-price">₹6,000<sup>/night</sup></span>
-            <div class="tariff-card-peak-per">+₹1,500 on regular rate</div>
+          <div class="tariff-card-per">per room · per night</div>
+          <div class="tariff-card-seasons">
+            <div class="tariff-card-season-row">
+              <span class="tariff-card-season-label"><i class="fas fa-sun" aria-hidden="true"></i>Regular Season</span>
+              <span class="tariff-card-season-price">₹4,500</span>
+            </div>
+            <div class="tariff-card-season-row">
+              <span class="tariff-card-season-label"><i class="fas fa-calendar-alt" aria-hidden="true"></i>Season Rate</span>
+              <span class="tariff-card-season-price">₹5,400</span>
+            </div>
+            <div class="tariff-card-season-row peak">
+              <span class="tariff-card-season-label"><i class="fas fa-star" aria-hidden="true"></i>Peak Season</span>
+              <span class="tariff-card-season-price">₹7,999</span>
+            </div>
           </div>
           <a href="https://wa.me/919270318818?text=Hi%2C+I%27d+like+to+know+more+about+the+Season+Tariff+for+the+Super+Deluxe+Sea+Facing+room+at+Kamaxi+Beach+Resort." target="_blank" rel="noopener" class="tariff-card-cta">Enquire Now</a>
         </div>
@@ -1812,27 +1848,34 @@
           <div class="tariff-card-badge" style="background:linear-gradient(135deg,#8B4513,#5D2E0C)">Premium</div>
           <div class="tariff-card-icon"><i class="fas fa-crown" aria-hidden="true"></i></div>
           <div class="tariff-card-name">Sea Facing Bungalow</div>
-          <div class="tariff-card-old">was ₹6,000</div>
-          <div class="tariff-card-price">₹6,900</div>
-          <div class="tariff-card-per">per night · season rate</div>
-          <div class="tariff-card-peak">
-            <span class="tariff-card-peak-label"><i class="fas fa-calendar-star" aria-hidden="true"></i>Jan &amp; Dec Peak Rate<span class="tariff-card-peak-tag">+₹1,500</span></span>
-            <span class="tariff-card-peak-price">₹7,500<sup>/night</sup></span>
-            <div class="tariff-card-peak-per">+₹1,500 on regular rate</div>
+          <div class="tariff-card-per">per room · per night</div>
+          <div class="tariff-card-seasons">
+            <div class="tariff-card-season-row">
+              <span class="tariff-card-season-label"><i class="fas fa-sun" aria-hidden="true"></i>Regular Season</span>
+              <span class="tariff-card-season-price">₹6,000</span>
+            </div>
+            <div class="tariff-card-season-row">
+              <span class="tariff-card-season-label"><i class="fas fa-calendar-alt" aria-hidden="true"></i>Season Rate</span>
+              <span class="tariff-card-season-price">₹7,499</span>
+            </div>
+            <div class="tariff-card-season-row peak">
+              <span class="tariff-card-season-label"><i class="fas fa-star" aria-hidden="true"></i>Peak Season</span>
+              <span class="tariff-card-season-price">₹9,999</span>
+            </div>
           </div>
           <a href="https://wa.me/919270318818?text=Hi%2C+I%27d+like+to+know+more+about+the+Season+Tariff+for+the+Sea+Facing+Bungalow+at+Kamaxi+Beach+Resort." target="_blank" rel="noopener" class="tariff-card-cta">Enquire Now</a>
         </div>
       </div>
 
       <div class="tariff-terms-box reveal">
-        <h3>Tariff Terms &amp; Conditions</h3>
+        <h3>Terms &amp; Conditions</h3>
         <ul class="tariff-terms-list">
-          <li><i class="fas fa-check-circle" aria-hidden="true"></i><span>Rates shown are per room, per night, and include applicable taxes unless stated otherwise.</span></li>
-          <li><i class="fas fa-check-circle" aria-hidden="true"></i><span>Season rates apply during peak travel dates and are subject to change without prior notice.</span></li>
-          <li><i class="fas fa-check-circle" aria-hidden="true"></i><span>Please confirm the applicable tariff with our reservations team before making any payment.</span></li>
-          <li><i class="fas fa-check-circle" aria-hidden="true"></i><span>Extra bed / additional guest charges, if any, are billed separately and shared at the time of booking.</span></li>
-          <li><i class="fas fa-check-circle" aria-hidden="true"></i><span>Check-in is at 12:00 PM and check-out at 10:00 AM. A valid government photo ID is mandatory at check-in.</span></li>
-          <li><i class="fas fa-check-circle" aria-hidden="true"></i><span>During the peak months of <strong>January and December</strong>, a higher season surcharge of <strong>₹1,500</strong> per room per night applies across all categories.</span></li>
+          <li><i class="fas fa-check-circle" aria-hidden="true"></i><span><strong>Occupancy:</strong> The above room rates are applicable for <strong>2 adults</strong>, or a family of <strong>2 adults with up to 2 children below 12 years of age</strong>.</span></li>
+          <li><i class="fas fa-check-circle" aria-hidden="true"></i><span><strong>Extra Person:</strong> An additional mattress is available at <strong>₹1,000 per person per night</strong>, subject to availability.</span></li>
+          <li><i class="fas fa-check-circle" aria-hidden="true"></i><span><strong>GST Charges:</strong> Room tariff up to <strong>₹7,500 per night</strong> attracts <strong>5% GST</strong>; room tariff above <strong>₹7,500 per night</strong> attracts <strong>18% GST</strong>.</span></li>
+          <li><i class="fas fa-check-circle" aria-hidden="true"></i><span><strong>Weekend &amp; Special Holiday Charges:</strong> An additional <strong>₹500 per room per night</strong> will be applicable on the regular room tariff during weekends and special holidays.</span></li>
+          <li><i class="fas fa-check-circle" aria-hidden="true"></i><span><strong>Note:</strong> Booking rates are subject to change without prior notice. The final room tariff will be confirmed by the reservations team at the time of booking.</span></li>
+          <li><i class="fas fa-check-circle" aria-hidden="true"></i><span><strong>Extra bed / mattress</strong> is subject to availability.</span></li>
         </ul>
       </div>
     </div>
@@ -1843,7 +1886,7 @@
     <div class="container">
       <div class="cta-content reveal">
         <span class="section-label" style="font-size:2.4rem">Lock In Your Rate</span>
-        <h2 class="cta-title" id="tariff-cta-heading">Reserve at Today's<br><em>Season Rate</em></h2>
+        <h2 class="cta-title" id="tariff-cta-heading">Reserve at Today's<br><em>Best Rate</em></h2>
         <p class="cta-sub">Rates can change with demand and season — enquire now to confirm your room at the current tariff before you travel.</p>
         <div class="cta-actions">
           <a href="https://wa.me/919270318818?text=Hi%2C+I%27d+like+to+check+the+Season+Tariff+and+availability+at+Kamaxi+Beach+Resort." class="btn btn-gold" target="_blank" rel="noopener"><i class="fab fa-whatsapp" aria-hidden="true"></i>Enquire on WhatsApp</a>
