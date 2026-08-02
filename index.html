@@ -300,6 +300,23 @@
     .room-book-btn { padding: 10px 22px; background: transparent; border: 1px solid rgba(201,169,110,0.4); color: var(--gold-light); border-radius: var(--radius-sm); font-family: var(--font-sans); font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase; cursor: pointer; transition: var(--transition-fast); }
     .room-book-btn:hover { background: var(--gold); border-color: var(--gold); color: var(--white); }
 
+    /* ===== ROOM SEASON TARIFF ===== */
+    .rooms-tariff-note { max-width: 720px; margin: 14px auto 0; font-size: 0.85rem; font-weight: 300; color: rgba(255,255,255,0.5); line-height: 1.8; text-align: center; }
+    .rooms-tariff-note strong { color: var(--gold-light); font-weight: 500; }
+    .rooms-tariff-note a { color: var(--gold); text-decoration: underline; cursor: pointer; }
+    .room-tariff { margin-bottom: 18px; padding: 13px 16px 7px; background: rgba(13,61,58,0.35); border: 1px solid rgba(201,169,110,0.22); border-radius: var(--radius-sm); }
+    .room-tariff-head { font-size: 0.58rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--gold); display: flex; align-items: center; justify-content: space-between; margin-bottom: 6px; font-weight: 500; }
+    .room-tariff-head span { text-transform: none; letter-spacing: 0.04em; font-size: 0.6rem; color: rgba(255,255,255,0.4); }
+    .room-tariff-row { padding: 8px 0; border-bottom: 1px dashed rgba(255,255,255,0.1); }
+    .room-tariff-row:last-child { border-bottom: none; }
+    .rt-main { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+    .rt-label { font-size: 0.68rem; letter-spacing: 0.08em; text-transform: uppercase; color: rgba(255,255,255,0.62); white-space: nowrap; }
+    .rt-label i { margin-right: 7px; color: var(--gold); font-size: 0.6rem; }
+    .rt-price { font-family: var(--font-serif); font-size: 1.02rem; color: var(--gold-light); line-height: 1; white-space: nowrap; }
+    .rt-dates { display: block; font-size: 0.62rem; color: rgba(255,255,255,0.35); margin-top: 3px; }
+    .room-tariff-row.peak { background: rgba(201,169,110,0.1); margin: 0 -16px; padding: 9px 16px; }
+    .room-tariff-row.peak .rt-price { color: var(--gold); font-weight: 500; font-size: 1.12rem; }
+
     /* ===== ROOM QR PAYMENT ===== */
     .room-pay-btn { display: flex; align-items: center; justify-content: center; gap: 10px; width: 100%; margin-top: 14px; padding: 13px 16px; background: linear-gradient(135deg, rgba(201,169,110,0.16), rgba(201,169,110,0.05)); border: 1px solid rgba(201,169,110,0.35); border-radius: var(--radius-sm); color: var(--gold-light); font-family: var(--font-sans); font-size: 0.7rem; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; cursor: pointer; transition: var(--transition-fast); position: relative; overflow: hidden; }
     .room-pay-btn::before { content: ''; position: absolute; inset: 0; background: linear-gradient(135deg, var(--gold), var(--gold-dark)); opacity: 0; transition: opacity 0.3s ease; }
@@ -1003,6 +1020,7 @@
         <p class="section-subtitle" style="color:rgba(255,255,255,0.5)">Accommodation</p>
         <span class="section-label">Unforgettable Stays</span>
         <h2 class="section-title" style="color:var(--white)">Choose Your <em>Perfect</em> Retreat</h2>
+        <p class="rooms-tariff-note">Season tariff per room, per night &mdash; <strong>Regular:</strong> 1st June &ndash; 30th September &nbsp;&middot;&nbsp; <strong>Season:</strong> 1st October &ndash; 17th December &amp; 6th January &ndash; 31st May &nbsp;&middot;&nbsp; <strong>Peak:</strong> 18th December &ndash; 5th January. See the <a onclick="showPage('tariff')">full Season Tariff Card</a> for terms &amp; conditions.</p>
       </div>
       <div class="rooms-grid">
 
@@ -1022,7 +1040,31 @@
               <span class="amenity-tag"><i class="fas fa-tv" aria-hidden="true"></i>Television</span>
               <span class="amenity-tag"><i class="fas fa-bath" aria-hidden="true"></i>En-suite Bath</span>
             </div>
-            <div class="room-footer">
+                        <div class="room-tariff">
+              <div class="room-tariff-head">Season Tariff <span>per night · + applicable taxes</span></div>
+              <div class="room-tariff-row">
+                <div class="rt-main">
+                  <span class="rt-label"><i class="fas fa-sun" aria-hidden="true"></i>Regular Season</span>
+                  <span class="rt-price">₹3,500</span>
+                </div>
+                <span class="rt-dates">1st June – 30th September</span>
+              </div>
+              <div class="room-tariff-row">
+                <div class="rt-main">
+                  <span class="rt-label"><i class="fas fa-calendar-alt" aria-hidden="true"></i>Season Rate</span>
+                  <span class="rt-price">₹4,400</span>
+                </div>
+                <span class="rt-dates">1st October – 17th December &amp; 6th January – 31st May</span>
+              </div>
+              <div class="room-tariff-row peak">
+                <div class="rt-main">
+                  <span class="rt-label"><i class="fas fa-star" aria-hidden="true"></i>Peak Season</span>
+                  <span class="rt-price">₹6,599</span>
+                </div>
+                <span class="rt-dates">18th December – 5th January</span>
+              </div>
+            </div>
+<div class="room-footer">
               <div class="room-price">
                 <span class="from">Starting from</span>
                 <span class="amount">₹3,500</span>
@@ -1051,7 +1093,31 @@
               <span class="amenity-tag"><i class="fas fa-door-open" aria-hidden="true"></i>Private Balcony</span>
               <span class="amenity-tag"><i class="fas fa-wifi" aria-hidden="true"></i>Free Wi-Fi</span>
             </div>
-            <div class="room-footer">
+                        <div class="room-tariff">
+              <div class="room-tariff-head">Season Tariff <span>per night · + applicable taxes</span></div>
+              <div class="room-tariff-row">
+                <div class="rt-main">
+                  <span class="rt-label"><i class="fas fa-sun" aria-hidden="true"></i>Regular Season</span>
+                  <span class="rt-price">₹4,000</span>
+                </div>
+                <span class="rt-dates">1st June – 30th September</span>
+              </div>
+              <div class="room-tariff-row">
+                <div class="rt-main">
+                  <span class="rt-label"><i class="fas fa-calendar-alt" aria-hidden="true"></i>Season Rate</span>
+                  <span class="rt-price">₹4,900</span>
+                </div>
+                <span class="rt-dates">1st October – 17th December &amp; 6th January – 31st May</span>
+              </div>
+              <div class="room-tariff-row peak">
+                <div class="rt-main">
+                  <span class="rt-label"><i class="fas fa-star" aria-hidden="true"></i>Peak Season</span>
+                  <span class="rt-price">₹7,499</span>
+                </div>
+                <span class="rt-dates">18th December – 5th January</span>
+              </div>
+            </div>
+<div class="room-footer">
               <div class="room-price">
                 <span class="from">Starting from</span>
                 <span class="amount">₹4,000</span>
@@ -1079,7 +1145,31 @@
               <span class="amenity-tag"><i class="fas fa-expand" aria-hidden="true"></i>Spacious Layout</span>
               <span class="amenity-tag"><i class="fas fa-star" aria-hidden="true"></i>Upgraded Amenities</span>
             </div>
-            <div class="room-footer">
+                        <div class="room-tariff">
+              <div class="room-tariff-head">Season Tariff <span>per night · + applicable taxes</span></div>
+              <div class="room-tariff-row">
+                <div class="rt-main">
+                  <span class="rt-label"><i class="fas fa-sun" aria-hidden="true"></i>Regular Season</span>
+                  <span class="rt-price">₹4,500</span>
+                </div>
+                <span class="rt-dates">1st June – 30th September</span>
+              </div>
+              <div class="room-tariff-row">
+                <div class="rt-main">
+                  <span class="rt-label"><i class="fas fa-calendar-alt" aria-hidden="true"></i>Season Rate</span>
+                  <span class="rt-price">₹5,400</span>
+                </div>
+                <span class="rt-dates">1st October – 17th December &amp; 6th January – 31st May</span>
+              </div>
+              <div class="room-tariff-row peak">
+                <div class="rt-main">
+                  <span class="rt-label"><i class="fas fa-star" aria-hidden="true"></i>Peak Season</span>
+                  <span class="rt-price">₹7,999</span>
+                </div>
+                <span class="rt-dates">18th December – 5th January</span>
+              </div>
+            </div>
+<div class="room-footer">
               <div class="room-price">
                 <span class="from">Starting from</span>
                 <span class="amount">₹4,500</span>
@@ -1108,7 +1198,31 @@
               <span class="amenity-tag"><i class="fas fa-snowflake" aria-hidden="true"></i>Air Conditioned</span>
               <span class="amenity-tag"><i class="fas fa-crown" aria-hidden="true"></i>Premium</span>
             </div>
-            <div class="room-footer">
+                        <div class="room-tariff">
+              <div class="room-tariff-head">Season Tariff <span>per night · + applicable taxes</span></div>
+              <div class="room-tariff-row">
+                <div class="rt-main">
+                  <span class="rt-label"><i class="fas fa-sun" aria-hidden="true"></i>Regular Season</span>
+                  <span class="rt-price">₹6,000</span>
+                </div>
+                <span class="rt-dates">1st June – 30th September</span>
+              </div>
+              <div class="room-tariff-row">
+                <div class="rt-main">
+                  <span class="rt-label"><i class="fas fa-calendar-alt" aria-hidden="true"></i>Season Rate</span>
+                  <span class="rt-price">₹7,499</span>
+                </div>
+                <span class="rt-dates">1st October – 17th December &amp; 6th January – 31st May</span>
+              </div>
+              <div class="room-tariff-row peak">
+                <div class="rt-main">
+                  <span class="rt-label"><i class="fas fa-star" aria-hidden="true"></i>Peak Season</span>
+                  <span class="rt-price">₹9,999</span>
+                </div>
+                <span class="rt-dates">18th December – 5th January</span>
+              </div>
+            </div>
+<div class="room-footer">
               <div class="room-price">
                 <span class="from">Starting from</span>
                 <span class="amount">₹6,000</span>
